@@ -1,0 +1,32 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body,
+#root {
+  min-width: 320px;
+  min-height: 100vh;
+  color: hsl(0, 0%, 95%);
+  /* background-color: hsl(0, 0%, 5%); */
+}
+
+a {
+  font-weight: 500;
+  text-decoration: inherit;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+}
