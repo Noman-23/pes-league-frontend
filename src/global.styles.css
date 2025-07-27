@@ -1,6 +1,40 @@
+@import "tailwindcss";
+/* @import "tailwindcss/preflight"; */
+@tailwind utilities;
+
+@theme {
+  /*  #### COLORS #### */
+  /* BRAND */
+  --color-yellow-50: #fffff0;
+  --color-yellow-100: #feffe0;
+  --color-yellow-200: #fdffc1;
+  --color-yellow-300: #fcffa3;
+  --color-yellow-400: #fbff84;
+  --color-yellow-500: #faff65;
+  --color-yellow-600: #c8cc51;
+  --color-yellow-700: #96993d;
+  --color-yellow-800: #646628;
+  --color-yellow-900: #323314;
+
+  /* ACCENT */
+  --color-accent-50: #fff0e9;
+  --color-accent-100: #ffe1d2;
+  --color-accent-200: #ffc2a5;
+  --color-accent-300: #ffa479;
+  --color-accent-400: #ff854c;
+  --color-accent-500: #ff671f;
+  --color-accent-600: #cc5219;
+  --color-accent-700: #993e13;
+  --color-accent-800: #66290c;
+  --color-accent-900: #331506;
+
+  /* BREAK POINTS */
+  --breakpoint-2xs: 350px;
+  --breakpoint-xs: 425px;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-
 }
 
 *,

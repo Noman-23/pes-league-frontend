@@ -24,7 +24,7 @@ export function LoginForm({ className, ...props }) {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='flex flex-col gap-6'>
+            <div className='flex flex-col gap-4'>
               <div className='grid gap-3'>
                 <Label
                   className={'text-neutral-400'}
@@ -56,9 +56,7 @@ export function LoginForm({ className, ...props }) {
                 />
               </div>
               <div className='flex flex-col gap-3'>
-                <Button
-                  type='submit'
-                  className='bg-linear-30 from-neutral-950 to-neutral-800 from-30% border border-white/50  cursor-pointer transition-all duration-300 ease-in-out hover:shadow hover:shadow-accent active:scale-95'>
+                <Button className=' bg-yellow-100 hover:bg-yellow-200 text-neutral-950 transform  active:translate-y-0.5'>
                   Login
                 </Button>
               </div>

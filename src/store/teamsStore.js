@@ -1,13 +1,12 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { nanoid } from 'nanoid/non-secure';
 
 const teamsStore = (set) => ({
   teams: [],
 
   addTeam: (name) =>
     set((state) => ({
-      teams: [...state.teams, { id: nanoid(10), name }],
+      teams: [...state.teams, name],
     })),
 
   updateTeam: (id, newName) =>
