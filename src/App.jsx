@@ -1,10 +1,15 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import './global.styles.css';
 
 // Pages
-import { Home } from '@/pages/public/home';
+import { Leagues } from '@/pages/public/leagues';
 import { Login } from '@/pages/public/login';
+import { FavoriteLeagues } from './pages/public/favorite-leagues';
+import { LeagueDetails } from './pages/public/league-details';
+import PageNotFound from './pages/public/page-not-found';
+import { Matches } from './features/league/matches';
+import { PointsTable } from './features/league/points-table';
 // import Dashboard from '@/pages/Dashboard';
 // import Leagues from '@/pages/Leagues';
 // import Matches from '@/pages/Matches';
@@ -30,43 +35,18 @@ function App() {
   const location = useLocation();
   return (
     <AnimatePresence mode='wait'>
-      <Routes
-        location={location}
-        key={location.pathname}>
-        <Route
-          index
-          element={<Home />}
-        />
-        <Route
-          path='/login'
-          element={<Login />}
-        />
+      <Routes location={location} key={location.pathname}>
+        <Route index element={<Navigate to='/leagues' replace />} />
+        <Route path='/leagues' element={<Leagues />} />
+        <Route path='/league/:id' element={<LeagueDetails />}>
+          <Route index element={<Navigate to='points-table' replace />} />
+          <Route path='points-table' element={<PointsTable />} />
+          <Route path='matches' element={<Matches />} />
+        </Route>
+        <Route path='/favorites' element={<FavoriteLeagues />} />
+        <Route path='/login' element={<Login />} />
 
-        {/* <Route
-              path='/'
-              element={
-                <PrivateRoute>
-                  <Layout />
-                </PrivateRoute>
-              }>
-              <Route
-                index
-                element={<Dashboard />}
-              />
-              <Route
-                path='leagues'
-                element={<Leagues />}
-              />
-              <Route
-                path='matches/:leagueId'
-                element={<Matches />}
-              />
-            </Route>
-
-            <Route
-              path='*'
-              element={<NotFound />}
-            /> */}
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
     </AnimatePresence>
   );

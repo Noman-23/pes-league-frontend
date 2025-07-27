@@ -1,4 +1,4 @@
-import { LoginForm } from '@/components/login-form';
+import { LoginForm } from '@/features/login/login-form';
 import withTransition from '@/components/shared/withTransition';
 
 function Page() {
