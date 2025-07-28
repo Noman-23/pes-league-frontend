@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
-const _duration = 1;
+const _duration = 0.75;
+
 export default function withTransition(Page) {
   return () => (
     <>
@@ -14,7 +15,7 @@ export default function withTransition(Page) {
       />
       <motion.div
         key={'div-2'}
-        className='fixed top-0 left-0 w-full h-screen bg-neutral-400 origin-top'
+        className='fixed top-0 left-0 w-full h-screen bg-neutral-800 origin-top'
         initial={{ scaleY: 1 }}
         animate={{ scaleY: 0 }}
         exit={{ scaleY: 1 }}
