@@ -1,0 +1,12 @@
+# netlify.toml - configuration file for Netlify deployment
+
+[build]
+  command = "npm run build"
+  publish = "dist"  # Vite outputs build files here by default
+
+
+# Redirect all requests to index.html (for SPA routing)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
