@@ -3,6 +3,8 @@ import { DrawerFooter, DrawerHeader, DrawerTitle } from '@/components/ui/drawer'
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
+import { useCreateLeague } from './hooks/useLeagues';
+import { useQueryClient } from '@tanstack/react-query';
 
 const getTeams = (team) => {
   return team?.split(',')?.reduce((acc, t) => {
@@ -20,6 +22,8 @@ export function AddLeagueForm({ onSuccess }) {
     },
   });
 
+  const { mutate: createLeague, isPending } = useCreateLeague();
+  const queryClient = useQueryClient();
   const onSubmit = (data) => {
     console.log({ data });
     const teams = getTeams(data?.team);
@@ -29,8 +33,14 @@ export function AddLeagueForm({ onSuccess }) {
     };
     console.log(payload);
     // API CALL
-    reset();
-    onSuccess?.();
+    createLeague(payload, {
+      onSuccess: (res) => {
+        console.log(res, 'res');
+        queryClient.invalidateQueries(['leagues']);
+        reset();
+        onSuccess?.();
+      },
+    });
   };
 
   return (
@@ -42,12 +52,11 @@ export function AddLeagueForm({ onSuccess }) {
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col max-w-[400px] w-full mx-auto my-2 gap-4 pb-8 px-4'>
         <div className='grid gap-3'>
-          <Label
-            className={'text-neutral-400'}
-            htmlFor='name'>
+          <Label className={'text-neutral-400'} htmlFor='name'>
             League Name
           </Label>
           <Input
+            disabled={isPending}
             id='name'
             type='text'
             placeholder='Enter League Name'
@@ -57,12 +66,11 @@ export function AddLeagueForm({ onSuccess }) {
           />
         </div>
         <div className='grid gap-3 grow'>
-          <Label
-            htmlFor='team'
-            className='text-neutral-400'>
+          <Label htmlFor='team' className='text-neutral-400'>
             Team Names
           </Label>
           <Input
+            disabled={isPending}
             id='team'
             type='text'
             placeholder='Enter Team Names (comma seperated)'
@@ -70,7 +78,9 @@ export function AddLeagueForm({ onSuccess }) {
             {...register('team', { required: true })}
           />
         </div>
-        <Button className='bg-yellow-100 text-neutral-950 w-full max-w-[400px]'>
+        <Button
+          disabled={isPending}
+          className='bg-yellow-100 text-neutral-950 w-full max-w-[400px]'>
           Create League
         </Button>
       </form>

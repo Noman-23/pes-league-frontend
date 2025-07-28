@@ -4,16 +4,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
+import { useLogin } from '../home/hooks/useLogin';
 
 export function LoginForm({ className, ...props }) {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      username: '',
+      password: '',
+    },
+  });
+  const { mutate: login, isPending } = useLogin();
   const onSubmit = (data) => {
     console.log(data);
+    login(data);
   };
+
   return (
-    <div
-      className={cn('flex flex-col gap-6 ', className)}
-      {...props}>
+    <div className={cn('flex flex-col gap-6 ', className)} {...props}>
       <Card
         className={
           'bg-linear-30 from-neutral-950 to-neutral-800 from-60% backdrop-blur-md border border-white/20 shadow-lg py-12'
@@ -26,12 +33,11 @@ export function LoginForm({ className, ...props }) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='flex flex-col gap-4'>
               <div className='grid gap-3'>
-                <Label
-                  className={'text-neutral-400'}
-                  htmlFor='username'>
+                <Label className={'text-neutral-400'} htmlFor='username'>
                   User Name
                 </Label>
                 <Input
+                  disabled={isPending}
                   id='username'
                   type='text'
                   placeholder='admin'
@@ -41,12 +47,11 @@ export function LoginForm({ className, ...props }) {
                 />
               </div>
               <div className='grid gap-3'>
-                <Label
-                  className={'text-neutral-400 '}
-                  htmlFor='password'>
+                <Label className={'text-neutral-400 '} htmlFor='password'>
                   Password
                 </Label>
                 <Input
+                  disabled={isPending}
                   id='password'
                   type='password'
                   placeholder='password'
@@ -56,7 +61,9 @@ export function LoginForm({ className, ...props }) {
                 />
               </div>
               <div className='flex flex-col gap-3'>
-                <Button className=' bg-yellow-100 hover:bg-yellow-200 text-neutral-950 transform  active:translate-y-0.5'>
+                <Button
+                  disabled={isPending}
+                  className=' bg-yellow-100 hover:bg-yellow-200 text-neutral-950 transform  active:translate-y-0.5'>
                   Login
                 </Button>
               </div>

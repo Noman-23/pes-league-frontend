@@ -9,7 +9,7 @@ export function HomeHeader({ fav }) {
   return (
     <div className='fixed top-0 left-0 right-0'>
       <div className='flex items-center justify-between py-2 min-h-12 border-b border-yellow-100 text-yellow-100 bg-neutral-950 px-4'>
-        <div>LOGO</div>
+        <button onClick={() => handleNavigate('/')}>LOGO</button>
         <div className=' flex gap-4'>
           <button onClick={() => handleNavigate(fav ? '/' : '/favorites')}>
             {fav ? <TableProperties /> : <Heart />}
