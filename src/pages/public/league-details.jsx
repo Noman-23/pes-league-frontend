@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 
 function Page() {
   return (
-    <div className='min-h-screen fixed inset-0 bg-neutral-950 flex flex-col'>
+    <div className='min-h-[90dvh] fixed inset-0 bg-neutral-950 flex flex-col'>
       <HomeHeader />
       <div className='overflow-y-auto h-full pt-12'>
         <Outlet />
